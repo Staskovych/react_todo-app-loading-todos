@@ -39,15 +39,16 @@ export const App: React.FC = () => {
   }
 
   const visibleTodos = todos.filter(todo => {
-    if (filter === FilterStatus.Active) {
-      return !todo.completed;
-    }
+    switch (filter) {
+      case FilterStatus.Active:
+        return !todo.completed;
 
-    if (filter === FilterStatus.Completed) {
-      return todo.completed;
-    }
+      case FilterStatus.Completed:
+        return todo.completed;
 
-    return true;
+      default:
+        return true;
+    }
   });
 
   const activeCount = todos.filter(todo => !todo.completed).length;
